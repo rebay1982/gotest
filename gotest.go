@@ -7,14 +7,28 @@ import (
 	"github.com/google/go-github/github"
 )
 
-// FetchOrganizations Fetch all the public organizations' membership of a user.
+// FetchRepositories This is a comment.
 //
-func FetchOrganizations(username string) ([]*github.Organization, error) {
+func FetchRepositories(username string) ([]*github.Repository, error) {
 	client := github.NewClient(nil)
-	orgs, _, err := client.Organizations.List(context.Background(), username, nil)
-	return orgs, err
+	repos, _, err := client.Repositories.List(context.Background(), username, nil)
+
+	return repos, err
 }
 
 func main() {
-	fmt.Println("GoTest")
+	var username string
+	fmt.Print("Enter GitHub username: ")
+	fmt.Scanf("%s", &username)
+
+	repos, err := FetchRepositories(username)
+
+	if err != nil {
+		fmt.Printf("Error: %v\n", err)
+		return
+	}
+
+	for i, repo := range repos {
+		fmt.Printf("%v. %v\n", i+1, repo.GetName())
+	}
 }
