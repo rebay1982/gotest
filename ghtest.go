@@ -8,23 +8,6 @@ import (
 	"golang.org/x/oauth2"
 )
 
-// FetchRepositories This is a comment.
-//
-func FetchRepositories(username string) ([]*github.Repository, error) {
-	client := github.NewClient(nil)
-	repos, _, err := client.Repositories.List(context.Background(), username, nil)
-
-	return repos, err
-}
-
-// FetchPullRequests this is a comment
-func FetchPullRequests(owner string, repo string) ([]*github.PullRequest, error) {
-	client := github.NewClient(nil)
-	pulls, _, err := client.PullRequests.List(context.Background(), owner, repo, nil)
-
-	return pulls, err
-}
-
 func main() {
 	ghToken := ""
 
